@@ -1,5 +1,6 @@
 --FreeCodeCamp - Celestial Bodies 
 --Projeto simples de criação de um banco sobre Corpos celestiais 
+--Utilizando o SSMS 
 
 --Criação Banco de Dados Universe
 
