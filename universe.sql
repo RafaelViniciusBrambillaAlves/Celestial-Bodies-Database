@@ -34,7 +34,7 @@ CREATE TABLE galaxy(
 --Criação da Tabela planet
 
 CREATE TABLE planet (
-  planet_id VARCHAR(30) PRIMARY KEY ,
+  planet_id VARCHAR(30) PRIMARY KEY,
   size_planet NUMERIC NOT NULL,
   tips_planet VARCHAR(30) UNIQUE,
   duration_rotation VARCHAR(30) NOT NULL,
@@ -65,25 +65,21 @@ CREATE TABLE constellation (
 
 --Inserindo valores ficticios da tabela galaxy
 
-INSERT INTO galaxy (galaxy_id, size_galaxy, age_galaxy, tips_galaxy, number_star, name) 
-VALUES 
-('ga1', 111, 112, 'tip1', 113,'name1'),
-('ga2', 211, 212, 'tip2', 213,'name2'),
-('ga3', 311, 312, 'tip3', 313,'name3'),
-('ga4', 411, 412, 'tip4', 413,'name4'),
-('ga5', 511, 512, 'tip5', 513,'name5'),
-('ga6', 611, 612, 'tip6', 613,'name6');
+INSERT INTO galaxy VALUES ('ga1', 111, 112, 'tip1', 113,'name1');
+INSERT INTO galaxy VALUES ('ga2', 211, 212, 'tip2', 213,'name2');
+INSERT INTO galaxy VALUES ('ga3', 311, 312, 'tip3', 313,'name3');
+INSERT INTO galaxy VALUES ('ga4', 411, 412, 'tip4', 413,'name4');
+INSERT INTO galaxy VALUES ('ga5', 511, 512, 'tip5', 513,'name5');
+INSERT INTO galaxy VALUES ('ga6', 611, 612, 'tip6', 613,'name6');
 
 --Inserindo valores ficticios da tabela star
 
-INSERT INTO star(star_id, age_star, size_star, descrition_Star, galaxy_id, name)
-VALUES 
-('s1', 1, 11, 'des1', 'ga1'	, 'name1'),
-('s2', 2, 22, 'des2', 'ga2'	, 'name2'),
-('s3', 3, 33, 'des3', 'ga3'	, 'name3'),
-('s4', 4, 44, 'des4', 'ga4'	, 'name4'),
-('s5', 5, 55, 'des5', 'ga5'	, 'name5'),
-('s6', 6, 66, 'des6', 'ga6'	, 'name6');
+INSERT INTO star VALUES ('s1', 1, 11, 'des1', 'ga1'	, 'name1');
+INSERT INTO star VALUES ('s2', 2, 22, 'des2', 'ga2'	, 'name2');
+INSERT INTO star VALUES ('s3', 3, 33, 'des3', 'ga3'	, 'name3');
+INSERT INTO star VALUES ('s4', 4, 44, 'des4', 'ga4'	, 'name4');
+INSERT INTO star VALUES ('s5', 5, 55, 'des5', 'ga5'	, 'name5');
+INSERT INTO star VALUES ('s6', 6, 66, 'des6', 'ga6'	, 'name6');
 
 --Inserindo valores ficticios da tabela planet
  
