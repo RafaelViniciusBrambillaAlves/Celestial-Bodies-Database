@@ -7,129 +7,69 @@ DROP DATABASE universe;
 
 --Criação Banco de Dados Universe
 
-CREATE DATABASE universe; 
+CREATE DATABASE universe
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Portuguese_Brazil.1252'
+    LC_CTYPE = 'Portuguese_Brazil.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
 
 --Criação da Tabela galaxy
 
 CREATE TABLE galaxy(
-  galaxy_id VARCHAR(30) PRIMARY KEY ,
+  galaxy_id INT PRIMARY KEY ,
+  name VARCHAR(30),
   size_galaxy NUMERIC UNIQUE, 
-  age_galaxy INT,
+  age_galaxy NUMERIC,
   tips_galaxy TEXT NOT NULL,
-  number_star NUMERIC NOT NULL,
-  name VARCHAR(30));
+  number_star NUMERIC NOT NULL
+ );
 
  --Criação da Tabela star
 
  CREATE TABLE star(
-  star_id VARCHAR(30) PRIMARY KEY ,
-  age_star INT NOT NULL,
+  star_id INT PRIMARY KEY,
+  name VARCHAR(30),
+  age_star NUMERIC NOT NULL,
   size_star NUMERIC NOT NULL,
-  descrition_Star VARCHAR(30) UNIQUE,
-  galaxy_id VARCHAR(30),
-  name VARCHAR(30)
+  descrition_Star VARCHAR(100) UNIQUE,
+  galaxy_id INT
 );
 
 --Criação da Tabela planet
 
 CREATE TABLE planet (
-  planet_id VARCHAR(30) PRIMARY KEY,
+  planet_id INT PRIMARY KEY,
+  name VARCHAR(30) UNIQUE,
   size_planet NUMERIC NOT NULL,
-  tips_planet VARCHAR(30) UNIQUE,
+  tips_planet VARCHAR(30),
   duration_rotation VARCHAR(30) NOT NULL,
   potentially_inhabited_planets BIT, 
-  have_water BIT, 
-  star_id VARCHAR(30),
-  name VARCHAR(30)
+  has_water BIT, 
+  star_id INT
  );
 
  --Criação da Tabela moon
 
  CREATE TABLE moon (
-  moon_id VARCHAR(30) PRIMARY KEY ,
+  moon_id INT PRIMARY KEY,
+  name VARCHAR(30),
   size_moon NUMERIC UNIQUE,
-  planet_id VARCHAR(30),
+  planet_id INT,
   duration_rotation VARCHAR(30) NOT NULL,
-  duration_translation VARCHAR(30) NOT NULL,
-  name VARCHAR(30)
+  duration_translation VARCHAR(30) NOT NULL
 );
 
 --Criação da Tabela constellation
 
 CREATE TABLE constellation (
-  constellations_id VARCHAR(30) PRIMARY KEY ,
-  classifications_Constellations VARCHAR(30) UNIQUE NOT NULL,
-  name VARCHAR(30) NOT NULL
+  constellations_id INT PRIMARY KEY,
+  name VARCHAR(30) NOT NULL,
+  classifications_Constellations VARCHAR(50) NOT NULL
 );
-
---Inserindo valores ficticios da tabela galaxy
-
-INSERT INTO galaxy VALUES ('ga1', 111, 112, 'tip1', 113,'name1');
-INSERT INTO galaxy VALUES ('ga2', 211, 212, 'tip2', 213,'name2');
-INSERT INTO galaxy VALUES ('ga3', 311, 312, 'tip3', 313,'name3');
-INSERT INTO galaxy VALUES ('ga4', 411, 412, 'tip4', 413,'name4');
-INSERT INTO galaxy VALUES ('ga5', 511, 512, 'tip5', 513,'name5');
-INSERT INTO galaxy VALUES ('ga6', 611, 612, 'tip6', 613,'name6');
-
---Inserindo valores ficticios da tabela star
-
-INSERT INTO star VALUES ('s1', 1, 11, 'des1', 'ga1'	, 'name1');
-INSERT INTO star VALUES ('s2', 2, 22, 'des2', 'ga2'	, 'name2');
-INSERT INTO star VALUES ('s3', 3, 33, 'des3', 'ga3'	, 'name3');
-INSERT INTO star VALUES ('s4', 4, 44, 'des4', 'ga4'	, 'name4');
-INSERT INTO star VALUES ('s5', 5, 55, 'des5', 'ga5'	, 'name5');
-INSERT INTO star VALUES ('s6', 6, 66, 'des6', 'ga6'	, 'name6');
-
---Inserindo valores ficticios da tabela planet
- 
-INSERT INTO planet VALUES ('p1', 1, 't1', '1', 1, 1, 's1', 'name1');
-INSERT INTO planet VALUES ('p2', 2, 't2', '2', 1, 0, 's1', 'name2');
-INSERT INTO planet VALUES ('p3', 3, 't3', '3', 1, 0, 's1', 'name3');
-INSERT INTO planet VALUES ('p4', 4, 't4', '4', 0, 1, 's2', 'name4');
-INSERT INTO planet VALUES ('p5', 5, 't5', '5', 1, 0, 's1', 'name5');
-INSERT INTO planet VALUES ('p6', 6, 't6', '6', 0, 1, 's3', 'name6');
-INSERT INTO planet VALUES ('p7', 7, 't7', '7', 0, 1, 's4', 'name7');
-INSERT INTO planet VALUES ('p8', 8, 't8', '8', 1, 0, 's2', 'name8');
-INSERT INTO planet VALUES ('p9', 9, 't9', '9', 0, 1, 's3', 'name9');
-INSERT INTO planet VALUES ('p10', 10, 't10', '10', 1, 1, 's4', 'name10');
-INSERT INTO planet VALUES ('p11', 11, 't11', '11', 1, 1, 's5', 'name11');
-INSERT INTO planet VALUES ('p12', 12, 't12', '12', 0, 0, 's6', 'name12');
-
--- Inserindo valores ficticios da tabela moon
-
-INSERT INTO moon VALUES ('m1', 1, 'p1', 't1', 't11', 'name1');
-INSERT INTO moon VALUES ('m2', 2, 'p1', 't2', 't22', 'name2'); 
-INSERT INTO moon VALUES ('m3', 3, 'p1', 't3', 't33', 'name3');
-INSERT INTO moon VALUES ('m4', 4, 'p2', 't4', 't44', 'name4'); 
-INSERT INTO moon VALUES ('m5', 5, 'p2', 't5', 't55', 'name5');
-INSERT INTO moon VALUES ('m6', 6, 'p3', 't6', 't66', 'name6'); 
-INSERT INTO moon VALUES ('m7', 7, 'p3', 't7', 't77', 'name7'); 
-INSERT INTO moon VALUES ('m8', 8, 'p4', 't8', 't88', 'name8'); 
-INSERT INTO moon VALUES ('m9', 9, 'p4', 't9', 't99', 'name9'); 
-INSERT INTO moon VALUES ('m10', 10, 'p5', 't10', 't1010', 'name10'); 
-INSERT INTO moon VALUES ('m11', 11, 'p6', 't11', 't1111', 'name11'); 
-INSERT INTO moon VALUES ('m12', 12, 'p7', 't12', 't1212', 'name12'); 
-INSERT INTO moon VALUES ('m13', 13, 'p7', 't13', 't1313', 'name13'); 
-INSERT INTO moon VALUES ('m14', 14, 'p8', 't14', 't1414', 'name14'); 
-INSERT INTO moon VALUES ('m15', 15, 'p8', 't15', 't1515', 'name15'); 
-INSERT INTO moon VALUES ('m16', 16, 'p9', 't16', 't1616', 'name16'); 
-INSERT INTO moon VALUES ('m17', 17, 'p10', 't17', 't1717', 'name17');
-INSERT INTO moon VALUES ('m18', 18, 'p10', 't18', 't1818', 'name18'); 
-INSERT INTO moon VALUES ('m19', 19, 'p11', 't19', 't1919', 'name19'); 
-INSERT INTO moon VALUES ('m20', 20, 'p12', 't20', 't2020', 'name20');
-
---Inserindo valores ficticios da tabela constellation 
-
-INSERT INTO constellation VALUES ('const1', 'class1', 'name1');
-INSERT INTO constellation VALUES ('const2', 'class2', 'name2');
-INSERT INTO constellation VALUES ('const3', 'class3', 'name3');
-INSERT INTO constellation VALUES ('const4', 'class4', 'name4');
-INSERT INTO constellation VALUES ('const5', 'class5', 'name5');
-INSERT INTO constellation VALUES ('const6', 'class6', 'name6');
-INSERT INTO constellation VALUES ('const7', 'class7', 'name7');
-INSERT INTO constellation VALUES ('const8', 'class8', 'name8');
-INSERT INTO constellation VALUES ('const9', 'class9', 'name9');
-INSERT INTO constellation VALUES ('const10', 'class10', 'name10');
 
 --Referenciando as PRIMARY KEY's
 
@@ -145,3 +85,87 @@ ADD CONSTRAINT PK_planet_planet_id FOREIGN KEY (planet_id) REFERENCES planet(pla
 ALTER TABLE moon
 ADD CONSTRAINT moon_planet_id FOREIGN KEY (planet_id) REFERENCES planet(planet_id);
 
+--Criando Sequencias para serem utilizadas no ID 
+
+CREATE SEQUENCE SEQ_galaxy;
+CREATE SEQUENCE SEQ_star;
+CREATE SEQUENCE SEQ_planet;
+CREATE SEQUENCE SEQ_moon;
+CREATE SEQUENCE SEQ_constellation;
+
+
+--Inserindo valores ficticios da tabela galaxy
+
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Via Láctea', 100000, 13000, 'Espiral', 200000000000);
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Andrômeda', 150000, 2200000000, 'Espiral', 100000000000);
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Sombrero', 75000, 2800000000, 'Elíptica', 30000000000);
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Centaurus A', 90000, 1200000000, 'Elíptica', 100000000000);
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Olho Negro', 50000, 1000000000, 'Irregular', 5000000000);
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Whirlpool', 80000, 2500000000, 'Espiral', 10000000000);
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Triangulum', 60000, 4000000000, 'Espiral', 5000000000);
+INSERT INTO galaxy VALUES (NEXTVAL('SEQ_galaxy'), 'Bodes', 70000, 8000000000, 'Espiral', 8000000000);
+
+--Inserindo valores ficticios da tabela star
+
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Sol', 5000000000, 109, 'Estrela de tamanho médio que faz parte da Via Láctea', 1);
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Alpha Centauri', 6000000000, 125, 'Estrela binária mais próxima do Sistema Solar', 1);
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Betelgeuse', 80000000, 936, 'Estrela supergigante vermelha localizada na constelação de Orion', 2);
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Sirius', 250000000, 184, 'Estrela mais brilhante no céu noturno vista da Terra', 1);
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Proxima Centauri', 4000000000, 85, 'Estrela anã vermelha mais próxima do Sistema Solar', 2);
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Antares', 120000000, 883, 'Super gigante vermelha na constelação de Scorpius', 3);
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Vega', 500000000, 221, 'Uma das estrelas mais brilhantes no hemisfério norte', 1);
+INSERT INTO star VALUES (NEXTVAL('SEQ_star'), 'Canopus', 30000000, 1294, 'Segunda estrela mais brilhante no céu noturno', 4);
+
+--Inserindo valores ficticios da tabela planet
+ 
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Terra', 12756, 'Terrestre', '24', B'1', B'1', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Marte', 6792, 'Terrestre', '24.6', B'0', B'0', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Júpiter', 139820, 'Gasoso', '9.9', B'0', B'0', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Saturno', 116460, 'Gasoso', '10.7', B'0', B'0', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Vênus', 12104, 'Terrestre', '243', B'0', B'0', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Mercúrio', 4879, 'Terrestre', '1408', B'0', B'0', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Netuno', 49528, 'Gasoso', '16.1', B'0', B'0', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Urano', 51118, 'Gasoso', '17.2', B'0', B'0', 1);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Kepler-452b', 20852, 'Terrestre', '384.84', B'1', B'1', 2);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Gliese 581g', 15399, 'Terrestre', '32.9', B'1', B'1', 5);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'TRAPPIST-1e', 4523, 'Terrestre', '6.1', B'1', B'1', 6);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'HD 189733b', 138250, 'Gasoso', '2.2', B'0', B'0', 7);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'Proxima Centauri b', 8500, 'Terrestre', '11.2', B'1', B'1', 5);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), 'WASP-12b', 183303, 'Gasoso', '26.4', B'0', B'0', 8);
+INSERT INTO planet VALUES (NEXTVAL('SEQ_planet'), '55 Cancri e', 19085, 'Terrestre', '0.7', B'1', B'0', 4);
+
+-- Inserindo valores ficticios da tabela moon
+
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Lua da Terra', 3474, 1, '27.3', '27.3');
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Fobos de Marte', 22, 2, '0.3', '0.3'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Deimos de Marte', 12, 2, '1.3', '1.3');
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Ganimedes de Júpiter', 5262, 3, '7.2', '7.2'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Calisto de Júpiter', 4821, 3, '16.7', '16.7');
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Europa de Júpiter', 3122, 3, '3.6', '3.6'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Io de Júpiter', 3660, 3, '1.8', '1.8'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Titã de Saturno', 5150, 4, '15.9', '15.9');
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Reia de Saturno', 1528, 4, '4.5', '4.5'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Encélado de Saturno', 504, 4, '1.4', '1.4'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Titânia de Urano', 1578, 5, '8.7', '8.7'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Oberon de Urano', 1523, 5, '13.5', '13.5'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Miranda de Urano', 471, 5, '1.4', '1.4'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Tritão de Netuno', 2707, 6, '5.9', '5.9'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Proteu de Netuno', 420, 6, '1.1', '1.1'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Larissa de Netuno', 208, 6, '0.5', '0.5'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Lua de Kepler-452b', 2343, 9, '14.1', '14.1');
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Lua de Gliese 581g', 1132, 10, '4.3', '4.3'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Lua de TRAPPIST-1e', 876, 11, '2.9', '2.9'); 
+INSERT INTO moon VALUES (NEXTVAL('SEQ_moon'), 'Lua de Proxima Centauri b', 674, 13, '7.5', '7.5');
+
+--Inserindo valores ficticios da tabela constellation 
+
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Órion', 'Constelação de Zodíacos');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Ursa Maior', 'Constelação Circumpolar');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Centauro', 'Constelação de Hemisfério Sul');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Cisne', 'Constelação de Verão');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Escorpião', 'Constelação de Zodíaco');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Andrômeda', 'Constelação de Outono');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Leão', 'Constelação de Zodíaco');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Sagitário', 'Constelação de Zodíaco');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Cassiopeia', 'Constelação de Inverno');
+INSERT INTO constellation VALUES (NEXTVAL('SEQ_constellation'), 'Dragão', 'Constelação de Hemisfério Norte');
